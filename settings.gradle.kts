@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "MercadoLibreTest"
 include(":app")
- 
+include(":domain")
+include(":data")
