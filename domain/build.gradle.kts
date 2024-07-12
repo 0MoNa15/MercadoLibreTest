@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
 }
 
@@ -8,12 +8,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.mona15dev.domain"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -40,7 +35,6 @@ android {
 }
 
 dependencies {
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
 }
