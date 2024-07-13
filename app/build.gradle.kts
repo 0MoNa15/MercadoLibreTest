@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.navigation.compose)
 
     // Dependency Injection Hilt
     implementation(libs.hilt.android)

@@ -1,4 +1,4 @@
-package com.mona15dev.mercadolibretest.list
+package com.mona15dev.mercadolibretest.list.viewmodel
 
 import com.mona15dev.domain.product.list.usecase.GetProductByNameUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
