@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    kotlin("kapt")
 }
 
 android {
@@ -43,4 +44,8 @@ dependencies {
     testImplementation(libs.coroutines.test)
     testImplementation(libs.core.testing)
     testImplementation(libs.mockito)
+
+    // Dependency Injection Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }
