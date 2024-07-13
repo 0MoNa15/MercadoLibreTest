@@ -52,14 +52,12 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun Greeting(
     name: String,
     modifier: Modifier = Modifier,
-    //viewModel: ProductListViewModel = hiltViewModel()
+    viewModel: ProductListViewModel = hiltViewModel()
 ) {
 
-    /*LaunchedEffect(Unit) {
-        viewModel.onSearchViewClicked()
-    }
-
-    val snackbarMessage by viewModel.snackbar.observeAsState()
+    viewModel.onSearchViewClicked("Motorola")
+    val snackbarMessage by viewModel.messageLiveData.observeAsState()
+    val listProducts by viewModel.productsByNameListLiveData.observeAsState()
 
     Column(modifier = modifier) {
         Text(
@@ -74,7 +72,14 @@ fun Greeting(
                 modifier = Modifier.padding(top = 16.dp)
             )
         }
-    }*/
+
+        listProducts?.let {
+            Text(
+                text = "Products: $it",
+                modifier = Modifier.padding(top = 16.dp)
+            )
+        }
+    }
 }
 
 

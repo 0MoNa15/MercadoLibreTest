@@ -5,9 +5,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.LiveData
+import com.mona15dev.domain.product.list.model.Product
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.Job
 import javax.inject.Inject
 
 @HiltViewModel
@@ -15,31 +14,24 @@ class ProductListViewModel @Inject constructor(
     private val getProductByNameUseCase: GetProductByNameUseCase
 ) : ViewModel() {
 
-    private val _loading = MutableLiveData(false)
-    private val _snackBar = MutableLiveData<String?>()
-    val snackbar: LiveData<String?>
-        get() = _snackBar
+    val isLoading = MutableLiveData(false)
+    val messageLiveData = MutableLiveData<String>()
+    val productsByNameListLiveData = MutableLiveData<List<Product>>()
 
-    fun onSearchViewClicked() {
-        searchProductsByName("Motorola")
+    fun onSearchViewClicked(queryNameOfProduct: String) {
+        searchProductsByName(queryNameOfProduct)
     }
 
     private fun searchProductsByName(queryNameOfProduct: String) {
-        launchProducts {
-            getProductByNameUseCase.getProductsByName(queryNameOfProduct)
-        }
-    }
-
-    private fun launchProducts(block: suspend () -> Unit): Job {
-        return viewModelScope.launch {
+        viewModelScope.launch {
+            isLoading.postValue(true)
             try {
-                _loading.value = true
-                block()
-            } catch (error: Exception) {
-                //Temporal hacer flujo  de errores bien hecho
-                _snackBar.value = error.message
-            } finally {
-                _loading.value = false
+                val products = getProductByNameUseCase.getProductsByName(queryNameOfProduct)
+                productsByNameListLiveData.postValue(products)
+            } catch (e: Exception) {
+                isLoading.postValue(false)
+                messageLiveData.value = e.message.toString()
+                //Temporal refactorizar para el manejo de excepciones
             }
         }
     }
