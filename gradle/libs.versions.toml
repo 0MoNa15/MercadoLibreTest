@@ -13,6 +13,9 @@ retrofit = "2.9.0"
 hilt = "2.46.1"
 navigation = "2.7.7"
 compose = "1.6.8"
+coreTesting_version = "2.2.0"
+coroutines_version = "1.8.1"
+mockito_version = "5.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -29,6 +32,9 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "j
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "coreTesting_version" }
+mockito = { group = "org.mockito", name = "mockito-inline", version.ref = "mockito_version" }
+coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines_version" }
 
 # DB Room
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
@@ -56,6 +62,7 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 
 # ViewModel
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines_version" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

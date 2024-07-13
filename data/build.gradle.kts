@@ -43,7 +43,9 @@ dependencies {
 
     // Test
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
+    testImplementation(libs.coroutines.test)
+    testImplementation(libs.core.testing)
+    testImplementation(libs.mockito)
 
     // DB Room
     implementation(libs.androidx.room.runtime)
