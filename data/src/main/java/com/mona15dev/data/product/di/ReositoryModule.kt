@@ -13,24 +13,26 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RepositoryModule {
+class ReositoryModule {
 
-    @Singleton
     @Provides
-    fun provideProductListRetrofitRepository(network: ProductNetwork)
-        : ProductListRetrofitRepository
-        = ProductListRetrofitRepository(network)
+    @Singleton
+    fun provideProductListRetrofitRepository(network: ProductNetwork): ProductListRetrofitRepository {
+        return ProductListRetrofitRepository(network)
+    }
 
-    //BD
-    @Singleton
     @Provides
-    fun provideProductListRoomRepository()
-        : ProductListRoomRepository
-        = ProductListRoomRepository()
+    @Singleton
+    fun provideProductListRoomRepository(): ProductListRoomRepository {
+        return ProductListRoomRepository()
+    }
 
+    /*@Provides
     @Singleton
-    @Provides
-    fun provideRecipeRepository(remote: ProductListRetrofitRepository, local: ProductListRoomRepository)
-        : ProductListRepository
-        = ProductListRepositoryImpl(remote, local)
+    fun provideProductListRepository(
+        remote: ProductListRetrofitRepository,
+        local: ProductListRoomRepository
+    ): ProductListRepository {
+        return ProductListRepositoryImpl(remote, local)
+    }*/
 }

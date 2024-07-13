@@ -53,6 +53,7 @@ android {
 
 dependencies {
     implementation(project(":domain"))
+    implementation(project(":data"))
 
     // Desing
     implementation(platform(libs.androidx.compose.bom))

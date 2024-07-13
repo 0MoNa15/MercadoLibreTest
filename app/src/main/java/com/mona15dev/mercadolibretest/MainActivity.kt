@@ -4,9 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -40,14 +43,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-/*@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}*/
-
 @Composable
 fun Greeting(
     name: String,
@@ -55,9 +50,13 @@ fun Greeting(
     viewModel: ProductListViewModel = hiltViewModel()
 ) {
 
-    viewModel.onSearchViewClicked("Motorola")
-    val snackbarMessage by viewModel.messageLiveData.observeAsState()
-    val listProducts by viewModel.productsByNameListLiveData.observeAsState()
+    LaunchedEffect(Unit) {
+        viewModel.onSearchByName("Motorola")
+    }
+
+    val products by viewModel.productsByNameListLiveData.observeAsState(emptyList())
+    val isLoading by viewModel.isLoading.observeAsState(false)
+    val message by viewModel.messageLiveData.observeAsState()
 
     Column(modifier = modifier) {
         Text(
@@ -65,23 +64,30 @@ fun Greeting(
             modifier = modifier
         )
 
-        snackbarMessage?.let {
+        /*if (isLoading) {
+            CircularProgressIndicator()
+        } else {
+            products.forEach { product ->
+                Text(text = product.title)
+            }
+        }*/
+
+        if (isLoading) {
+            CircularProgressIndicator()
+        }
+
+        products.forEach { product ->
+            Text(text = product.title)
+        }
+
+        message?.let {
             Text(
                 text = it,
                 color = Color.Red,
-                modifier = Modifier.padding(top = 16.dp)
-            )
-        }
-
-        listProducts?.let {
-            Text(
-                text = "Products: $it",
-                modifier = Modifier.padding(top = 16.dp)
-            )
+                modifier = Modifier.padding(top = 16.dp))
         }
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable

@@ -18,7 +18,7 @@ class ProductListViewModel @Inject constructor(
     val messageLiveData = MutableLiveData<String>()
     val productsByNameListLiveData = MutableLiveData<List<Product>>()
 
-    fun onSearchViewClicked(queryNameOfProduct: String) {
+    fun onSearchByName(queryNameOfProduct: String) {
         searchProductsByName(queryNameOfProduct)
     }
 
@@ -26,12 +26,12 @@ class ProductListViewModel @Inject constructor(
         viewModelScope.launch {
             isLoading.postValue(true)
             try {
-                val products = getProductByNameUseCase.getProductsByName(queryNameOfProduct)
+                val products = getProductByNameUseCase.invoke(queryNameOfProduct)
                 productsByNameListLiveData.postValue(products)
+                isLoading.postValue(false)
             } catch (e: Exception) {
                 isLoading.postValue(false)
                 messageLiveData.value = e.message.toString()
-                //Temporal refactorizar para el manejo de excepciones
             }
         }
     }
