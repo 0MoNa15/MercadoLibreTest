@@ -1,4 +1,4 @@
-package com.mona15dev.mercadolibretest.ui.theme
+package com.mona15dev.mercadolibretest.main.theme
 
 import androidx.compose.ui.graphics.Color
 

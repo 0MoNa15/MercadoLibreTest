@@ -1,4 +1,4 @@
-package com.mona15dev.mercadolibretest.ui.theme
+package com.mona15dev.mercadolibretest.main.theme
 
 import android.app.Activity
 import android.os.Build

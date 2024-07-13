@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 private const val BASE_URL = "https://api.mercadolibre.com/sites/MLA/"
-//https://api.mercadolibre.com/sites/MLA/search?q=Motorola
 
 @Module
 @InstallIn(SingletonComponent::class)

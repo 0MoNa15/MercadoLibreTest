@@ -1,4 +1,4 @@
-package com.mona15dev.mercadolibretest.di
+package com.mona15dev.mercadolibretest.main.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
