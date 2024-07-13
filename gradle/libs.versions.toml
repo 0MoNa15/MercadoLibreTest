@@ -10,7 +10,7 @@ activityCompose = "1.9.0"
 composeBom = "2024.06.00"
 room = "2.6.1"
 retrofit = "2.9.0"
-hilt = "2.46.1"
+hilt = "2.48"
 navigation = "2.7.7"
 compose = "1.6.8"
 coreTesting_version = "2.2.0"
@@ -19,6 +19,7 @@ mockito_version = "5.1.1"
 runtimeLivedata = "1.6.8"
 hilt_navigation_compose = "1.0.0"
 hilt_navigation = "1.0.0"
+dagger_hilt_plugin = "2.48"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -74,4 +75,5 @@ androidx-runtime-livedata = { group = "androidx.compose.runtime", name = "runtim
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-dagger-hilt = { id = "dagger.hilt.android.plugin", version.ref = "hilt_navigation" }
+#dagger-hilt = { id = "dagger.hilt.android.plugin", version.ref = "dagger_hilt_plugin" }
+dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "dagger_hilt_plugin" }

@@ -1,11 +1,7 @@
-package com.mona15dev.data.product.list.di
+package com.mona15dev.data.product.di
 
 import com.google.gson.GsonBuilder
 import com.mona15dev.data.product.list.api.ProductNetwork
-import com.mona15dev.data.product.list.repository.ProductListRepositoryImpl
-import com.mona15dev.data.product.list.repository.ProductListRetrofitRepository
-import com.mona15dev.data.product.list.repository.ProductListRoomRepository
-import com.mona15dev.domain.product.list.repository.ProductListRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,12 +17,11 @@ private const val BASE_URL = "https://api.mercadolibre.com/sites/MLA/"
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ProductRepositoryModule {
+class HttpClientModule {
 
     @Singleton
     @Provides
     fun provideRetrofit(): Retrofit {
-
         val okHttpClient: OkHttpClient = OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
@@ -47,29 +42,43 @@ object ProductRepositoryModule {
 
     @Singleton
     @Provides
+    fun provideProductNetwork(retrofit: Retrofit): ProductNetwork
+        = retrofit.create(ProductNetwork::class.java)
+
+    /*@Provides
+    @Singleton
+    fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
+
+    @Provides
+    @Singleton
+    fun provideHttpClient(): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+
+        return OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .addInterceptor(loggingInterceptor)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(
+        httpClient: OkHttpClient,
+        gsonConverterFactory: GsonConverterFactory
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(httpClient)
+            .addConverterFactory(gsonConverterFactory)
+            .build()
+    }
+
+    @Singleton
+    @Provides
     fun provideProductNetwork(retrofit: Retrofit): ProductNetwork {
         return retrofit.create(ProductNetwork::class.java)
-    }
-
-    @Singleton
-    @Provides
-    fun provideProductListRetrofitRepository(network: ProductNetwork): ProductListRetrofitRepository {
-        return ProductListRetrofitRepository(network)
-    }
-
-    //BD
-    @Provides
-    @Singleton
-    fun provideProductListRoomRepository(): ProductListRoomRepository {
-        return ProductListRoomRepository()
-    }
-
-    @Singleton
-    @Provides
-    fun provideProductListRepository(
-        remote: ProductListRetrofitRepository,
-        local: ProductListRoomRepository
-    ): ProductListRepository {
-        return ProductListRepositoryImpl(remote, local)
-    }
+    }*/
 }
