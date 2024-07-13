@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class ReositoryModule {
+class RepositoryModule {
 
     @Provides
     @Singleton
@@ -27,12 +27,12 @@ class ReositoryModule {
         return ProductListRoomRepository()
     }
 
-    /*@Provides
+    @Provides
     @Singleton
     fun provideProductListRepository(
         remote: ProductListRetrofitRepository,
         local: ProductListRoomRepository
     ): ProductListRepository {
         return ProductListRepositoryImpl(remote, local)
-    }*/
+    }
 }
