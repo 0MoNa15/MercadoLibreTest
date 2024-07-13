@@ -7,6 +7,6 @@ import javax.inject.Inject
 class GetProductByNameUseCase @Inject constructor(
     private val productRepository: ProductListRepository
 ) {
-    suspend fun invoke(searchByName: String) : List<Product> =
+    suspend fun invoke(searchByName: String): List<Product> =
         productRepository.getProductsByName(searchByName)
 }

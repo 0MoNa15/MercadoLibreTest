@@ -56,6 +56,7 @@ dependencies {
     // Networking Retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
+    implementation(libs.logging.interceptor)
 
     // Dependency Injection Hilt
     implementation(libs.hilt.android)

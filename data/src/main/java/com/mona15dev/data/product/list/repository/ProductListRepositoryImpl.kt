@@ -11,13 +11,9 @@ class ProductListRepositoryImpl @Inject constructor(
     override suspend fun getProductsByName(search: String): List<Product> {
         try {
             //BD
-            //return remote.getProductsByNameRetrofit(search)
-            return listOf(
-                Product("1", "Smartphone", 699.99, "https://example.com/thumbnail1.jpg"),
-                Product("2", "Laptop", 1299.99, "https://example.com/thumbnail2.jpg"),
-                Product("3", "Headphones", 149.99, "https://example.com/thumbnail3.jpg")
-            )
+            return remote.getProductsByNameRetrofit(search)
         } catch  (cause: Throwable) {
+            //Temporal manejo de errores pendiente
             throw Exception("getProductsByName")
         }
     }

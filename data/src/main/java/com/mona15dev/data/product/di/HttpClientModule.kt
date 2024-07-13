@@ -1,12 +1,12 @@
 package com.mona15dev.data.product.di
 
-import com.google.gson.GsonBuilder
 import com.mona15dev.data.product.list.api.ProductNetwork
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -19,25 +19,35 @@ private const val BASE_URL = "https://api.mercadolibre.com/sites/MLA/"
 @InstallIn(SingletonComponent::class)
 class HttpClientModule {
 
-    @Singleton
     @Provides
-    fun provideRetrofit(): Retrofit {
-        val okHttpClient: OkHttpClient = OkHttpClient.Builder()
+    @Singleton
+    fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
+
+    @Provides
+    @Singleton
+    fun provideHttpClient(): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+
+        return OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .addInterceptor(loggingInterceptor)
             .build()
+    }
 
-        val gson = GsonBuilder()
-            .setLenient()
-            .create()
-
-        val builder = Retrofit.Builder()
-            .client(okHttpClient)
+    @Provides
+    @Singleton
+    fun provideRetrofit(
+        httpClient: OkHttpClient,
+        gsonConverterFactory: GsonConverterFactory
+    ): Retrofit {
+        return Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-
-        return builder.build()
+            .client(httpClient)
+            .addConverterFactory(gsonConverterFactory)
+            .build()
     }
 
     @Singleton
