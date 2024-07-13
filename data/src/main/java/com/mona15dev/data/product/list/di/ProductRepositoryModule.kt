@@ -58,6 +58,11 @@ object ProductRepositoryModule {
     }
 
     //BD
+    @Provides
+    @Singleton
+    fun provideProductListRoomRepository(): ProductListRoomRepository {
+        return ProductListRoomRepository()
+    }
 
     @Singleton
     @Provides

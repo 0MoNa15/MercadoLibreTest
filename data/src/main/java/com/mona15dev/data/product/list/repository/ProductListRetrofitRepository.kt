@@ -6,7 +6,9 @@ import com.mona15dev.domain.product.list.model.Product
 import retrofit2.HttpException
 import javax.inject.Inject
 
-class ProductListRetrofitRepository @Inject constructor(private val network: ProductNetwork) {
+class ProductListRetrofitRepository @Inject constructor(
+    private val network: ProductNetwork
+) {
 
     suspend fun getProductsByNameRetrofit(query: String) : List<Product> {
         return try {
