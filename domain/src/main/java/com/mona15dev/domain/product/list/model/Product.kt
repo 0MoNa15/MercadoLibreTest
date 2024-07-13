@@ -1,5 +1,8 @@
 package com.mona15dev.domain.product.list.model
 
-class Product(){
-
-}
+data class Product(
+    var id: String,
+    var title: String,
+    var price: Double,
+    var thumbnail: String
+)
