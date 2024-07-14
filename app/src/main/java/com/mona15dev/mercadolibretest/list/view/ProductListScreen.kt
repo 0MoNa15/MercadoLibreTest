@@ -15,8 +15,8 @@ fun ProductListScreen (
 ) {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         ProductListContent(
-            modifier = Modifier.padding(innerPadding),
             navigateToDetailProductScreen = navigateToDetailProductScreen,
+            modifier = Modifier.padding(innerPadding),
             viewModel = viewModel
         )
     }

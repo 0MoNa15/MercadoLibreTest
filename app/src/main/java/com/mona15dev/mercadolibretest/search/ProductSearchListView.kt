@@ -23,7 +23,7 @@ import com.mona15dev.domain.product.list.model.Product
 import com.mona15dev.mercadolibretest.R
 
 @Composable
-fun ProductListView(
+fun ProductSearchListView(
     navigateToListProductsScreen: () -> Unit,
     products: List<Product>
 ) {

@@ -1,52 +1,80 @@
 package com.mona15dev.mercadolibretest.list.view
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
+import com.mona15dev.mercadolibretest.R
 import com.mona15dev.mercadolibretest.list.viewmodel.ProductListViewModel
+import com.mona15dev.mercadolibretest.search.WaitingProductsList
 
 @Composable
 fun ProductListContent(
-    modifier: Modifier = Modifier,
-    navigateToDetailProductScreen: (recipeId: String) -> Unit,
+    navigateToDetailProductScreen: (productId: String) -> Unit,
+    modifier: Modifier,
     viewModel: ProductListViewModel
 ) {
+    val products by viewModel.productsByNameListLiveData.observeAsState(emptyList())
+    val loading by viewModel.isLoading.observeAsState(false)
 
     LaunchedEffect(Unit) {
-       //viewModel.onSearchByName(productSearched)
+        viewModel.onSearchByName("TITULO")
     }
 
-    val products by viewModel.productsByNameListLiveData.observeAsState(emptyList())
-    val isLoading by viewModel.isLoading.observeAsState(false)
-    val message by viewModel.messageLiveData.observeAsState()
-
-    Column(modifier = modifier) {
-        Text(
-            text = "Hello !",
+    Column {
+        Column(
             modifier = modifier
-        )
+                .fillMaxWidth()
+                .background(
+                    Brush.verticalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            Color.Black
+                        ),
+                        startY = 1f,
+                        endY = 0f
+                    )
+                )
+        ) {
 
-        if (isLoading) {
-            CircularProgressIndicator()
-        }
+            Spacer(
+                modifier
+                    .height(dimensionResource(id = R.dimen.size_search))
+                    .background(colorResource(id = R.color.yellow_main))
+                    .fillMaxWidth()
+            )
 
-        products.forEach { product ->
-            Text(text = product.title)
-        }
+            Box (
+                modifier = modifier
+                    .fillMaxWidth()
+                    .background(
+                        color = colorResource(id = R.color.yellow_main)
+                    )
+            ) {
+                Text(text = "TITULITO aqui si")
+            }
 
-        message?.let {
-            Text(
-                text = it,
-                color = Color.Red,
-                modifier = Modifier.padding(top = 16.dp))
+            if (loading != null && loading == true) {
+                WaitingProductsList()
+            } else {
+                //Temporal manejar error de cuando no se tengan datos aquí
+                ProductListView(
+                    products = products,
+                    navigateToDetailProductScreen = navigateToDetailProductScreen
+                )
+            }
         }
     }
 }

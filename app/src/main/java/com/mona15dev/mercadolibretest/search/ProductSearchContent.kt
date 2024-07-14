@@ -90,7 +90,7 @@ fun ProductSearchContent(
                 WaitingProductsList()
             } else {
                 //Temporal manejar error de cuando no se tengan datos aquí
-                ProductListView(
+                ProductSearchListView(
                     products = productsFilter.toList(),
                     navigateToListProductsScreen = navigateToListProductsScreen
                 )

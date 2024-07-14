@@ -24,7 +24,10 @@ import com.mona15dev.domain.product.list.model.Product
 import com.mona15dev.mercadolibretest.R
 
 @Composable
-fun ProductItem(product: Product) {
+fun ProductItem(
+    navigateToDetailProductScreen: (productId: String) -> Unit,
+    product: Product
+) {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = dimensionResource(id = R.dimen.padding_4dp)),
         modifier = Modifier.fillMaxWidth(),
