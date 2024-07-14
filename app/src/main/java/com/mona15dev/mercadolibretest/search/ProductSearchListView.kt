@@ -21,6 +21,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
 import com.mona15dev.domain.product.list.model.Product
 import com.mona15dev.mercadolibretest.R
+import com.mona15dev.mercadolibretest.list.view.state.EmptyListView
 
 @Composable
 fun ProductSearchListView(

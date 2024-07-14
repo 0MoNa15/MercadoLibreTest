@@ -18,7 +18,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import com.mona15dev.mercadolibretest.R
 import com.mona15dev.mercadolibretest.list.viewmodel.ProductListViewModel
-import com.mona15dev.mercadolibretest.search.WaitingProductsList
+import com.mona15dev.mercadolibretest.list.view.state.WaitingProductsList
 
 @Composable
 fun ProductListContent(

@@ -29,6 +29,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.mona15dev.domain.product.list.model.Product
 import com.mona15dev.mercadolibretest.R
+import com.mona15dev.mercadolibretest.list.view.state.WaitingProductsList
 import com.mona15dev.mercadolibretest.list.viewmodel.ProductListViewModel
 
 @Composable

@@ -1,4 +1,4 @@
-package com.mona15dev.mercadolibretest.search
+package com.mona15dev.mercadolibretest.list.view.state
 
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.Arrangement
