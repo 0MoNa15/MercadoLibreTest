@@ -13,7 +13,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -24,15 +26,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import com.mona15dev.domain.product.list.model.Product
 import com.mona15dev.mercadolibretest.R
+import com.mona15dev.mercadolibretest.list.viewmodel.ProductListViewModel
 
 @Composable
 fun ProductSearchContent(
+    searchQuery: String,
     navigateToListProductsScreen: (productId: String) -> Unit,
-    products: List<Product>?,
-    loading: Boolean?
+    viewModel: ProductListViewModel
 ) {
+    LaunchedEffect(Unit) {
+        viewModel.onSearchByName(searchQuery)
+    }
+
+    val products by viewModel.productsByNameListLiveData.observeAsState(emptyList())
+    val loading by viewModel.isLoading.observeAsState(false)
+
     Column{
         Column(
             modifier = Modifier
@@ -56,16 +65,16 @@ fun ProductSearchContent(
                     .fillMaxWidth()
             )
 
-            val productsFilter = products?.map { it }?.toMutableStateList()
+            val productsFilter = products.map { it }.toMutableStateList()
             val search: (value: String) -> Unit = { query ->
-                val result = products?.map { it }?.filter { product ->
+                val result = products.map { it }.filter { product ->
                     product.title.contains(query, ignoreCase = true)
                     //Temporal, revisar por que puede ser cualquier dato el que el usuario esté buscando y no solo el titulo
                 }
 
-                productsFilter?.apply {
+                productsFilter.apply {
                     clear()
-                    addAll(result?.map { it } ?: emptyList())
+                    addAll(result.map { it } ?: emptyList())
                 }
             }
             Box (
@@ -83,7 +92,10 @@ fun ProductSearchContent(
                 WaitingProductsList()
             } else {
                 //Temporal manejar error de cuando no se tengan datos aquí
-                
+                ProductListView(
+                    products = productsFilter.toList(),
+                    navigateToListProductsScreen = navigateToListProductsScreen
+                )
             }
         }
     }

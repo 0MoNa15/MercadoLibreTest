@@ -19,7 +19,10 @@ class ProductListViewModel @Inject constructor(
     val productsByNameListLiveData = MutableLiveData<List<Product>>()
 
     fun onSearchByName(queryNameOfProduct: String) {
-        searchProductsByName(queryNameOfProduct)
+        if (!queryNameOfProduct.isNullOrEmpty() && queryNameOfProduct.isNotBlank()) {
+            searchProductsByName(queryNameOfProduct)
+        }
+        return
     }
 
     private fun searchProductsByName(queryNameOfProduct: String) {

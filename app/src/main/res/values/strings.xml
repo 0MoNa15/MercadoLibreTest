@@ -3,4 +3,5 @@
     <string name="search_product">Buscar en Mercado Libre</string>
     <string name="cancel">Cancelar</string>
     <string name="loading">Cargando...</string>
+    <string name="view_search_products">Buscar productos</string>
 </resources>
