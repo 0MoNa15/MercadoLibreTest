@@ -39,6 +39,8 @@ fun ProductSearchContent(
 ) {
     val products by viewModel.productsByNameListLiveData.observeAsState(emptyList())
     val loading by viewModel.isLoading.observeAsState(false)
+
+    //Temporal desacoplar la vista de la funcionalidad para filtrar la lista de productos
     val productsFilter = remember { mutableStateListOf<Product>() }
     val search: (value: String) -> Unit = { query ->
         if (!query.isNullOrEmpty() && query.isNotBlank()) {
