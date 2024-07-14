@@ -8,6 +8,7 @@ class ProductListRepositoryImpl @Inject constructor(
     private val remote: ProductListRetrofitRepository,
     private val local: ProductListRoomRepository
 ) : ProductListRepository {
+
     override suspend fun getProductsByName(search: String): List<Product> {
         try {
             //BD

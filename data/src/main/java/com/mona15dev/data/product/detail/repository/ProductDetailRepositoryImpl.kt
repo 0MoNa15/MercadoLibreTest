@@ -1,6 +1,19 @@
 package com.mona15dev.data.product.detail.repository
 
+import com.mona15dev.domain.product.detail.model.ProductDetail
 import com.mona15dev.domain.product.detail.repository.ProductDetailRepository
+import javax.inject.Inject
 
-class ProductDetailRepositoryImpl() : ProductDetailRepository {
+class ProductDetailRepositoryImpl @Inject constructor(
+    private val remote: ProductDetailRetrofitRepository
+) : ProductDetailRepository {
+
+    override suspend fun getProductDetail(productId: String): ProductDetail {
+        try {
+            return remote.getProductDetail(productId)
+        } catch  (cause: Throwable) {
+            //Temporal manejo de errores pendiente
+            throw Exception("getProductDetail")
+        }
+    }
 }

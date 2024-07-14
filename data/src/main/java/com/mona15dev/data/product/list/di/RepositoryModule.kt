@@ -1,4 +1,4 @@
-package com.mona15dev.data.product.di
+package com.mona15dev.data.product.list.di
 
 import com.mona15dev.data.product.api.ProductNetwork
 import com.mona15dev.data.product.list.repository.ProductListRepositoryImpl
