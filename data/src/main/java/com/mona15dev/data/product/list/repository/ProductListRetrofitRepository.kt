@@ -1,6 +1,6 @@
 package com.mona15dev.data.product.list.repository
 
-import com.mona15dev.data.product.list.api.ProductNetwork
+import com.mona15dev.data.product.api.ProductNetwork
 import com.mona15dev.data.product.list.dto.ProductDto
 import com.mona15dev.domain.product.list.model.Product
 import retrofit2.HttpException
@@ -12,7 +12,7 @@ class ProductListRetrofitRepository @Inject constructor(
 
     suspend fun getProductsByNameRetrofit(query: String) : List<Product> {
         return try {
-            val response = network.getProductsByName(query)
+            val response = network.apiSearchProducts(query)
             response.listProducts.map { mapProductDtoToProduct(it) }
         } catch (e: HttpException) {
             //Temporal crear clase personalizada de manejo de errores
