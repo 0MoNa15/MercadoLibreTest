@@ -15,7 +15,7 @@ class ProductListViewModel @Inject constructor(
 ) : ViewModel() {
 
     val isLoading = MutableLiveData(false)
-    val messageLiveData = MutableLiveData<String>()
+    val messageErrorLiveData = MutableLiveData<String>()
     val productsByNameListLiveData = MutableLiveData<List<Product>>()
 
     fun onSearchByName(queryNameOfProduct: String) {
@@ -35,7 +35,7 @@ class ProductListViewModel @Inject constructor(
                 isLoading.postValue(false)
             } catch (e: Exception) {
                 isLoading.postValue(false)
-                messageLiveData.value = e.message.toString()
+                messageErrorLiveData.value = e.message.toString()
             }
         }
     }

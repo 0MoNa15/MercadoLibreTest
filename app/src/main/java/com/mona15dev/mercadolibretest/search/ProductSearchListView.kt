@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.automirrored.twotone.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -74,7 +74,7 @@ fun ProductRow(
         )
 
         Icon(
-            imageVector = Icons.Default.KeyboardArrowUp, 
+            imageVector = Icons.AutoMirrored.TwoTone.KeyboardArrowRight,
             contentDescription = null,
             modifier = Modifier.size(dimensionResource(id = R.dimen.size_icon))
         )

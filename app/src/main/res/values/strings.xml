@@ -9,4 +9,6 @@
     <string name="error_default_detail_product">Error al cargar el detalle del producto</string>
     <string name="not_found_detail_product">No se ha encontrado el detalle del producto</string>
     <string name="reload">Reintentar</string>
+    <string name="products_list">Lista de productos</string>
+    <string name="not_found_list_products">No se han encontrado productos</string>
 </resources>

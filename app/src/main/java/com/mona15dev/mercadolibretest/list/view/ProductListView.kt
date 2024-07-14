@@ -27,25 +27,20 @@ import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
 import com.mona15dev.domain.product.list.model.Product
 import com.mona15dev.mercadolibretest.R
-import com.mona15dev.mercadolibretest.list.view.state.EmptyListView
 
 @Composable
 fun ProductListView(
     navigateToDetailProductScreen: (productId: String) -> Unit,
     products: List<Product>
 ) {
-    if (products.isEmpty()) {
-        EmptyListView()
-    } else {
-        LazyColumn(
-            contentPadding = PaddingValues(dimensionResource(id = R.dimen.no_padding)),
-            verticalArrangement = Arrangement.Center,
-        ) {
-            itemsIndexed(products) { _, product ->
-                ProductItem(
-                    product = product,
-                    navigateToDetailProductScreen = navigateToDetailProductScreen)
-            }
+    LazyColumn(
+        contentPadding = PaddingValues(dimensionResource(id = R.dimen.no_padding)),
+        verticalArrangement = Arrangement.Center,
+    ) {
+        itemsIndexed(products) { _, product ->
+            ProductItem(
+                product = product,
+                navigateToDetailProductScreen = navigateToDetailProductScreen)
         }
     }
 }
@@ -67,8 +62,8 @@ fun ProductItem(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             AsyncImage(
-                model = "https://http2.mlstatic.com/D_737539-MLM49765463196_042022-I.jpg",
-                contentDescription = "Product Image",
+                model = product.thumbnail,
+                contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(dimensionResource(id = R.dimen.size_image))
