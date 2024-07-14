@@ -1,6 +1,6 @@
 package com.mona15dev.data.product.di
 
-import com.mona15dev.data.product.list.api.ProductNetwork
+import com.mona15dev.data.product.api.ProductNetwork
 import com.mona15dev.data.product.list.repository.ProductListRepositoryImpl
 import com.mona15dev.data.product.list.repository.ProductListRetrofitRepository
 import com.mona15dev.data.product.list.repository.ProductListRoomRepository

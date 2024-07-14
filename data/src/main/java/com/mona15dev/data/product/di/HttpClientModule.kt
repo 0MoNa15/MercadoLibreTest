@@ -1,6 +1,6 @@
 package com.mona15dev.data.product.di
 
-import com.mona15dev.data.product.list.api.ProductNetwork
+import com.mona15dev.data.product.api.ProductNetwork
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
