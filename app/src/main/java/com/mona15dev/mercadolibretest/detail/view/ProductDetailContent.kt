@@ -12,13 +12,11 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.mona15dev.domain.product.detail.model.ProductCondition
 import com.mona15dev.domain.product.detail.model.ProductDetail
-import com.mona15dev.mercadolibretest.detail.viewmodel.ProductDetailViewModel
 
 @Composable
 fun ProductDetailContent(
     productDetail: ProductDetail,
-    modifier: Modifier,
-    viewModel: ProductDetailViewModel
+    modifier: Modifier
 ) {
     Column(modifier = modifier.padding(16.dp)) {
         ConditionView(condition = productDetail.condition)
