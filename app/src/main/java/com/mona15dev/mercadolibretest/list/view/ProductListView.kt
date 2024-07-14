@@ -1,5 +1,6 @@
 package com.mona15dev.mercadolibretest.list.view
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -60,8 +61,10 @@ fun ProductItem(
         colors = CardDefaults.cardColors(containerColor = Color.White),
     ) {
         Row(
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_double)),
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier
+                .padding(dimensionResource(id = R.dimen.padding_double))
+                .clickable { navigateToDetailProductScreen(product.id) },
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             AsyncImage(
                 model = "https://http2.mlstatic.com/D_737539-MLM49765463196_042022-I.jpg",
