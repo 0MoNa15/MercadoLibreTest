@@ -35,6 +35,7 @@ fun mapProductDtoToProduct(productDto: ProductDto): Product {
         id = productDto.id,
         title = productDto.title,
         price = productDto.price,
-        thumbnail = productDto.thumbnail
+        thumbnail = productDto.thumbnail,
+        free_shipping = productDto.free_shipping
     )
 }
