@@ -21,7 +21,6 @@ fun Navigation(isLoading: (Boolean) -> Unit, loadingSplashScreen: Boolean) {
 
             composable(ScreenRoute.PRODUCT_SEARCH_SCREEN.toString()) {
                 ProductSearchScreen(
-                    searchQuery = "Motor",
                     navigateToListProductsScreen = {
                         navController.navigate("${ScreenRoute.PRODUCT_LIST_SCREEN}/${it}")
                     }

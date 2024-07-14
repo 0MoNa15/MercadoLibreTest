@@ -9,13 +9,11 @@ import com.mona15dev.mercadolibretest.list.viewmodel.ProductListViewModel
 
 @Composable
 fun ProductSearchScreen(
-    searchQuery: String,
     navigateToListProductsScreen: (productId: String) -> Unit,
     viewModel: ProductListViewModel = hiltViewModel()
 ) {
     Surface(Modifier.fillMaxSize()) {
         ProductSearchContent(
-            searchQuery = searchQuery,
             navigateToListProductsScreen = navigateToListProductsScreen,
             viewModel = viewModel
         )

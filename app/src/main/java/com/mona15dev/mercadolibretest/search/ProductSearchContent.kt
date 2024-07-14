@@ -16,7 +16,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.toMutableStateList
@@ -26,23 +28,34 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import com.mona15dev.domain.product.list.model.Product
 import com.mona15dev.mercadolibretest.R
 import com.mona15dev.mercadolibretest.list.viewmodel.ProductListViewModel
 
 @Composable
 fun ProductSearchContent(
-    searchQuery: String,
     navigateToListProductsScreen: (productId: String) -> Unit,
     viewModel: ProductListViewModel
 ) {
-    LaunchedEffect(Unit) {
-        viewModel.onSearchByName(searchQuery)
-    }
-
     val products by viewModel.productsByNameListLiveData.observeAsState(emptyList())
     val loading by viewModel.isLoading.observeAsState(false)
+    val productsFilter = remember { mutableStateListOf<Product>() }
+    val search: (value: String) -> Unit = { query ->
+        if (query.isNotBlank()) {
+            // Aquí llamas a la función del ViewModel cada vez que el query cambia
+            viewModel.onSearchByName(query)
+        } else {
+            productsFilter.clear()
+            productsFilter.addAll(products)
+        }
+    }
 
-    Column{
+    LaunchedEffect(products) {
+        productsFilter.clear()
+        productsFilter.addAll(products)
+    }
+
+    Column {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -65,24 +78,11 @@ fun ProductSearchContent(
                     .fillMaxWidth()
             )
 
-            val productsFilter = products.map { it }.toMutableStateList()
-            val search: (value: String) -> Unit = { query ->
-                val result = products.map { it }.filter { product ->
-                    product.title.contains(query, ignoreCase = true)
-                    //Temporal, revisar por que puede ser cualquier dato el que el usuario esté buscando y no solo el titulo
-                }
-
-                productsFilter.apply {
-                    clear()
-                    addAll(result.map { it } ?: emptyList())
-                }
-            }
             Box (
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(
-                        color = colorResource(id = R.color.yellow_main),
-                        //shape = RoundedCornerShape(percent = 50)
+                        color = colorResource(id = R.color.yellow_main)
                     )
             ) {
                 FieldSearch(search)
