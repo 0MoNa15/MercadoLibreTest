@@ -1,5 +1,6 @@
 package com.mona15dev.mercadolibretest.search
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -24,7 +25,8 @@ import com.mona15dev.mercadolibretest.R
 
 @Composable
 fun ProductListView(
-    navigateToListProductsScreen: (productId: String) -> Unit,
+    productSearched: String,
+    navigateToListProductsScreen: (productSearched: String) -> Unit,
     products: List<Product>
 ) {
     if (products.isEmpty()) {
@@ -36,6 +38,7 @@ fun ProductListView(
         ) {
             itemsIndexed(products) { _, product ->
                 ProductRow(
+                    productSearched = productSearched,
                     product = product,
                     navigateToListProductsScreen = navigateToListProductsScreen)
             }
@@ -45,14 +48,15 @@ fun ProductListView(
 
 @Composable
 fun ProductRow(
+    productSearched: String,
     product: Product,
-    navigateToListProductsScreen: (String) -> Unit
+    navigateToListProductsScreen: (productSearched: String) -> Unit
 ) {
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            //.clickable { navigateToListProductsScreen() }
+            .clickable { navigateToListProductsScreen(productSearched) }
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween

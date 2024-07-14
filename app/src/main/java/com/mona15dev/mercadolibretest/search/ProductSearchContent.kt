@@ -93,6 +93,7 @@ fun ProductSearchContent(
             } else {
                 //Temporal manejar error de cuando no se tengan datos aquí
                 ProductListView(
+                    productSearched = search.toString(),
                     products = productsFilter.toList(),
                     navigateToListProductsScreen = navigateToListProductsScreen
                 )

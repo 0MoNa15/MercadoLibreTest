@@ -10,12 +10,13 @@ import com.mona15dev.mercadolibretest.list.viewmodel.ProductListViewModel
 
 @Composable
 fun ProductListScreen (
+    productSearch: String,
     navigateToDetailProductScreen: (productId: String) -> Unit,
     viewModel: ProductListViewModel = hiltViewModel()
 ) {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         ProductListContent(
-            name = "Android",
+            productSearched = productSearch,
             modifier = Modifier.padding(innerPadding),
             navigateToDetailProductScreen = navigateToDetailProductScreen,
             viewModel = viewModel

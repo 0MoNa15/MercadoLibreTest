@@ -2,6 +2,7 @@ package com.mona15dev.mercadolibretest.main.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -27,12 +28,41 @@ fun Navigation(isLoading: (Boolean) -> Unit, loadingSplashScreen: Boolean) {
                 )
             }
 
-            composable(ScreenRoute.PRODUCT_LIST_SCREEN.toString()) {
+            /*composable(ScreenRoute.PRODUCT_LIST_SCREEN.toString()) {
                 ProductListScreen(
                     navigateToDetailProductScreen = {
                         navController.navigate("${ScreenRoute.PRODUCT_DETAIL_SCREEN}/${it}")
                     }
                 )
+            }*/
+
+            /*composable(
+                route = "${ScreenRoute.PRODUCT_LIST_SCREEN.route}/{query}",
+                arguments = listOf(navArgument("query") { type = NavType.StringType })
+            ) { backStackEntry ->
+                val query = backStackEntry.arguments?.getString("query") ?: ""
+                ProductListScreen(
+                    query = query,
+                    navigateToDetailProductScreen = { productId ->
+                        navController.navigate("${ScreenRoute.PRODUCT_DETAIL_SCREEN.route}/$productId")
+                    }
+                )
+            }*/
+
+            composable("${ScreenRoute.PRODUCT_LIST_SCREEN}/{${ScreenArgument.PRODUCT_SEARCH_ARGUMENT}}") {
+                //Temporal convertir a rememberSaveable
+                val productSearch = remember {
+                    it.arguments?.getString(ScreenArgument.PRODUCT_SEARCH_ARGUMENT.toString())
+                }
+
+                productSearch?.let {
+                    ProductListScreen(
+                        productSearch = productSearch,
+                        navigateToDetailProductScreen = {
+                            navController.navigate("${ScreenRoute.PRODUCT_DETAIL_SCREEN}/${it}")
+                        }
+                    )
+                }
             }
 
             composable("${ScreenRoute.PRODUCT_DETAIL_SCREEN}/{${ScreenArgument.PRODUCT_ID_ARGUMENT}}") {
