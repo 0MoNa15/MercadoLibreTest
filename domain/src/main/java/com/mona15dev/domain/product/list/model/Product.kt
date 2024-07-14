@@ -4,5 +4,6 @@ data class Product(
     var id: String,
     var title: String,
     var price: Double,
-    var thumbnail: String
+    var thumbnail: String,
+    var free_shipping: Boolean
 )
