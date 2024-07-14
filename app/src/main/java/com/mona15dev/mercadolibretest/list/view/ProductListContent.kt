@@ -15,14 +15,13 @@ import com.mona15dev.mercadolibretest.list.viewmodel.ProductListViewModel
 
 @Composable
 fun ProductListContent(
-    productSearched: String,
     modifier: Modifier = Modifier,
     navigateToDetailProductScreen: (recipeId: String) -> Unit,
     viewModel: ProductListViewModel
 ) {
 
     LaunchedEffect(Unit) {
-        viewModel.onSearchByName(productSearched)
+       //viewModel.onSearchByName(productSearched)
     }
 
     val products by viewModel.productsByNameListLiveData.observeAsState(emptyList())
@@ -31,7 +30,7 @@ fun ProductListContent(
 
     Column(modifier = modifier) {
         Text(
-            text = "Hello $productSearched!",
+            text = "Hello !",
             modifier = modifier
         )
 

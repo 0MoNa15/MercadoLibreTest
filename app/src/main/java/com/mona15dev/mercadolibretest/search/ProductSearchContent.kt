@@ -21,7 +21,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -34,15 +33,14 @@ import com.mona15dev.mercadolibretest.list.viewmodel.ProductListViewModel
 
 @Composable
 fun ProductSearchContent(
-    navigateToListProductsScreen: (productId: String) -> Unit,
+    navigateToListProductsScreen: () -> Unit,
     viewModel: ProductListViewModel
 ) {
     val products by viewModel.productsByNameListLiveData.observeAsState(emptyList())
     val loading by viewModel.isLoading.observeAsState(false)
     val productsFilter = remember { mutableStateListOf<Product>() }
     val search: (value: String) -> Unit = { query ->
-        if (query.isNotBlank()) {
-            // Aquí llamas a la función del ViewModel cada vez que el query cambia
+        if (!query.isNullOrEmpty() && query.isNotBlank()) {
             viewModel.onSearchByName(query)
         } else {
             productsFilter.clear()
@@ -93,7 +91,6 @@ fun ProductSearchContent(
             } else {
                 //Temporal manejar error de cuando no se tengan datos aquí
                 ProductListView(
-                    productSearched = search.toString(),
                     products = productsFilter.toList(),
                     navigateToListProductsScreen = navigateToListProductsScreen
                 )
@@ -101,6 +98,7 @@ fun ProductSearchContent(
         }
     }
 }
+
 
 @Composable
 private fun FieldSearch(

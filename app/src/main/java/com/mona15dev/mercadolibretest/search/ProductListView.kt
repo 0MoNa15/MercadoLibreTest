@@ -25,8 +25,7 @@ import com.mona15dev.mercadolibretest.R
 
 @Composable
 fun ProductListView(
-    productSearched: String,
-    navigateToListProductsScreen: (productSearched: String) -> Unit,
+    navigateToListProductsScreen: () -> Unit,
     products: List<Product>
 ) {
     if (products.isEmpty()) {
@@ -38,7 +37,6 @@ fun ProductListView(
         ) {
             itemsIndexed(products) { _, product ->
                 ProductRow(
-                    productSearched = productSearched,
                     product = product,
                     navigateToListProductsScreen = navigateToListProductsScreen)
             }
@@ -48,15 +46,14 @@ fun ProductListView(
 
 @Composable
 fun ProductRow(
-    productSearched: String,
     product: Product,
-    navigateToListProductsScreen: (productSearched: String) -> Unit
+    navigateToListProductsScreen: () -> Unit
 ) {
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { navigateToListProductsScreen(productSearched) }
+            .clickable {navigateToListProductsScreen() }
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
