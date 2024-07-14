@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-private const val BASE_URL = "https://api.mercadolibre.com/sites/MLA/"
+private const val BASE_URL = "https://api.mercadolibre.com/"
 
 @Module
 @InstallIn(SingletonComponent::class)

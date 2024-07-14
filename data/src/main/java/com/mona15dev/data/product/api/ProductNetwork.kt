@@ -7,7 +7,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ProductNetwork {
-    @GET("search")
+    @GET("sites/MLA/search")
     suspend fun apiSearchProducts(
         @Query("q") query: String
     ): ProductListDto
