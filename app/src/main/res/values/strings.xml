@@ -6,4 +6,7 @@
     <string name="view_search_products">Buscar productos</string>
     <string name="free_send">Envío gratis</string>
     <string name="installments_text">Hasta %1$d cuotas</string>
+    <string name="error_default_detail_product">Error al cargar el detalle del producto</string>
+    <string name="not_found_detail_product">No se ha encontrado el detalle del producto</string>
+    <string name="reload">Reintentar</string>
 </resources>
