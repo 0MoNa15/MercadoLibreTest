@@ -4,4 +4,6 @@
     <string name="cancel">Cancelar</string>
     <string name="loading">Cargando...</string>
     <string name="view_search_products">Buscar productos</string>
+    <string name="free_send">Envío gratis</string>
+    <string name="installments_text">Hasta %1$d cuotas</string>
 </resources>

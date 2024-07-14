@@ -19,7 +19,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import com.mona15dev.domain.product.list.model.Product
 import com.mona15dev.mercadolibretest.R
 
@@ -53,8 +52,8 @@ fun ProductRow(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable {navigateToListProductsScreen() }
-            .padding(16.dp),
+            .clickable { navigateToListProductsScreen() }
+            .padding(dimensionResource(id = R.dimen.padding_double)),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
