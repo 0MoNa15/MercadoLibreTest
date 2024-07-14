@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">MercadoLibreTest</string>
+    <string name="search_product">Buscar en Mercado Libre</string>
+    <string name="cancel">Cancelar</string>
+    <string name="loading">Cargando...</string>
 </resources>
