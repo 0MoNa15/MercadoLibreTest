@@ -35,7 +35,7 @@ fun ProductDetailContent(
 
         Spacer(modifier = modifier.height(16.dp))
         Text(
-            text = productDetail.price,
+            text = productDetail.price.toString(),
             color = Color.Black
         )
     }

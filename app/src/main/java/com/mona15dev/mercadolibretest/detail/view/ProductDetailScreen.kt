@@ -26,7 +26,8 @@ fun ProductDetailScreen(
 
 fun getMockProductDetail(): ProductDetail {
     return ProductDetail.createProductDetail(
-        price = "$1500",
+        id = "123",
+        price = 1500,
         title = "Motorola",
         pictures = listOf(
             "https://http2.mlstatic.com/D_793201-MLU74074058468_012024-O.jpg",
