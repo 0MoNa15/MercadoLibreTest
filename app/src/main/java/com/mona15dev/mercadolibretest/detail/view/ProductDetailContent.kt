@@ -1,7 +1,6 @@
 package com.mona15dev.mercadolibretest.detail.view
 
 import androidx.compose.runtime.Composable
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Text
@@ -9,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.mona15dev.domain.product.detail.model.ProductCondition
 import com.mona15dev.domain.product.detail.model.ProductDetail
@@ -21,25 +19,24 @@ fun ProductDetailContent(
     modifier: Modifier
 ) {
 
-    Column(modifier = modifier.padding(16.dp)) {
+    Column(modifier = modifier.padding(dimensionResource(id = R.dimen.padding_double))) {
 
         ConditionView(condition = productDetail.condition)
 
-        Spacer(modifier = modifier.height(8.dp))
+        Spacer(modifier = modifier.height(dimensionResource(id = R.dimen.padding)))
 
         Text(
             text = productDetail.title,
-            modifier = modifier.padding(bottom = 16.dp)
+            modifier = modifier.padding(bottom = dimensionResource(id = R.dimen.padding_double))
         )
 
         Box(modifier = modifier
             .fillMaxWidth()
             .aspectRatio(1.5f)) {
             PhotoCarousel(productDetail.pictures)
-            PhotoCountOverlay(currentIndex = 1, totalCount = productDetail.pictures.size)
         }
 
-        Spacer(modifier = modifier.height(16.dp))
+        Spacer(modifier = modifier.height(dimensionResource(id = R.dimen.padding_double)))
 
         Text(
             text = productDetail.price.toString(),
@@ -73,20 +70,4 @@ fun PhotoCarousel(images: List<String>) {
             )
         }
     }
-}
-
-@Composable
-fun PhotoCountOverlay(currentIndex: Int, totalCount: Int) {
-
-    Text(
-        text = "${currentIndex + 1}/$totalCount",
-        color = Color.White,
-        modifier = Modifier
-            .padding(dimensionResource(id = R.dimen.padding))
-            .background(Color.Black.copy(alpha = 0.5f))
-            .padding(
-                horizontal = dimensionResource(id = R.dimen.padding),
-                vertical = dimensionResource(id = R.dimen.padding_4dp)
-            )
-    )
 }
