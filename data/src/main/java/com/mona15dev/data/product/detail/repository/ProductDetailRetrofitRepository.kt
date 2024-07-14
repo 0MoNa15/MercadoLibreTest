@@ -22,6 +22,7 @@ class ProductDetailRetrofitRepository @Inject constructor(
                 404 -> throw Exception("Not Found")
                 500 -> throw Exception("Server Error")
                 else -> throw Exception("Unknown HTTP error")
+                //Temporal Para probar los estados, genera un 403 consultar una url incorrecta "https://api.mercadolibre.com/sites/MLA/items/MLA1680838032"
             }
         } catch (e: Exception) {
             throw Exception("Network error: ${e.message}")
