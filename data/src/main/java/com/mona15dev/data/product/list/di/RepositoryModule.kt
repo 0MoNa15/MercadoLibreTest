@@ -1,6 +1,7 @@
 package com.mona15dev.data.product.list.di
 
 import com.mona15dev.data.product.api.ProductNetwork
+import com.mona15dev.data.product.list.database.dao.ProductDao
 import com.mona15dev.data.product.list.repository.ProductListRepositoryImpl
 import com.mona15dev.data.product.list.repository.ProductListRetrofitRepository
 import com.mona15dev.data.product.list.repository.ProductListRoomRepository
@@ -23,8 +24,8 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideProductListRoomRepository(): ProductListRoomRepository {
-        return ProductListRoomRepository()
+    fun provideProductListRoomRepository(dao: ProductDao): ProductListRoomRepository {
+        return ProductListRoomRepository(dao)
     }
 
     @Provides

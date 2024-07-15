@@ -5,5 +5,5 @@ data class ProductDto (
     var title: String,
     var price: Double,
     var thumbnail: String,
-    var free_shipping: Boolean
+    var condition: String
 )
