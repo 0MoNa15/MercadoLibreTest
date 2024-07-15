@@ -20,12 +20,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
 import com.mona15dev.domain.product.list.model.Product
+import com.mona15dev.domain.product.list.model.getShortTitle
 import com.mona15dev.mercadolibretest.R
 import com.mona15dev.mercadolibretest.list.view.state.EmptyListView
 
 @Composable
 fun ProductSearchListView(
-    navigateToListProductsScreen: () -> Unit,
+    navigateToListProductsScreen: (querySearchProduct: String) -> Unit,
     products: List<Product>
 ) {
     if (products.isEmpty()) {
@@ -47,13 +48,15 @@ fun ProductSearchListView(
 @Composable
 fun ProductRow(
     product: Product,
-    navigateToListProductsScreen: () -> Unit
+    navigateToListProductsScreen: (querySearchProduct: String) -> Unit
 ) {
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { navigateToListProductsScreen() }
+            .clickable {
+                navigateToListProductsScreen(product.getShortTitle())
+            }
             .padding(dimensionResource(id = R.dimen.padding_double)),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween

@@ -7,3 +7,11 @@ data class Product(
     var thumbnail: String,
     var condition: String
 )
+
+fun Product.getShortTitle(maxLength: Int = 15): String {
+    return if (title.length > maxLength) {
+        title.take(maxLength)
+    } else {
+        title
+    }
+}

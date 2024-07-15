@@ -34,16 +34,18 @@ import com.mona15dev.mercadolibretest.list.viewmodel.ProductListViewModel
 
 @Composable
 fun ProductSearchContent(
-    navigateToListProductsScreen: () -> Unit,
+    navigateToListProductsScreen: (querySearchProduct: String) -> Unit,
     viewModel: ProductListViewModel
 ) {
     val products by viewModel.productsByNameListLiveData.observeAsState(emptyList())
     val loading by viewModel.isLoading.observeAsState(false)
+    var searchTerm by rememberSaveable { mutableStateOf("") }
 
     //Temporal desacoplar la vista de la funcionalidad para filtrar la lista de productos
     val productsFilter = remember { mutableStateListOf<Product>() }
     val search: (value: String) -> Unit = { query ->
-        if (!query.isNullOrEmpty() && query.isNotBlank()) {
+        searchTerm = query
+        if (query.isNotEmpty() && query.isNotBlank()) {
             viewModel.onSearchByName(query)
         } else {
             productsFilter.clear()
@@ -101,7 +103,6 @@ fun ProductSearchContent(
         }
     }
 }
-
 
 @Composable
 private fun FieldSearch(

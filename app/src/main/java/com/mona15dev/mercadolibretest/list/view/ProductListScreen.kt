@@ -15,6 +15,7 @@ import com.mona15dev.mercadolibretest.list.viewmodel.ProductListViewModel
 
 @Composable
 fun ProductListScreen (
+    nameProduct: String?,
     navigateToDetailProductScreen: (productId: String) -> Unit,
     productListViewModel: ProductListViewModel = hiltViewModel()
 ) {
@@ -24,7 +25,7 @@ fun ProductListScreen (
 
     products?.let {
         LaunchedEffect(it) {
-            productListViewModel.onSearchByName("Motorola")
+            productListViewModel.onSearchByName(nameProduct ?: "")
         }
     }
 

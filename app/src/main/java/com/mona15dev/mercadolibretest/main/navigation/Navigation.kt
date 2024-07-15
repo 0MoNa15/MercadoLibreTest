@@ -23,14 +23,19 @@ fun Navigation(isLoading: (Boolean) -> Unit, loadingSplashScreen: Boolean) {
 
             composable(ScreenRoute.PRODUCT_SEARCH_SCREEN.toString()) {
                 ProductSearchScreen(
-                    navigateToListProductsScreen = {
-                        navController.navigate(ScreenRoute.PRODUCT_LIST_SCREEN.toString())
+                    navigateToListProductsScreen = { nameProduct ->
+                        navController.navigate("${ScreenRoute.PRODUCT_LIST_SCREEN}/$nameProduct")
                     }
                 )
             }
 
-            composable(ScreenRoute.PRODUCT_LIST_SCREEN.toString()) {
+            composable("${ScreenRoute.PRODUCT_LIST_SCREEN}/{${ScreenArgument.PRODUCT_SEARCH_ARGUMENT}}") {
+                val querySearchProduct = remember {
+                    it.arguments?.getString(ScreenArgument.PRODUCT_SEARCH_ARGUMENT.toString())
+                }
+
                 ProductListScreen(
+                    nameProduct = querySearchProduct,
                     navigateToDetailProductScreen = { productId ->
                         navController.navigate("${ScreenRoute.PRODUCT_DETAIL_SCREEN}/$productId")
                     }
