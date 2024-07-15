@@ -12,6 +12,7 @@ import coil.compose.AsyncImage
 import com.mona15dev.domain.product.detail.model.ProductCondition
 import com.mona15dev.domain.product.detail.model.ProductDetail
 import com.mona15dev.mercadolibretest.R
+import com.mona15dev.mercadolibretest.list.view.HeaderSection
 
 @Composable
 fun ProductDetailContent(
@@ -19,7 +20,13 @@ fun ProductDetailContent(
     modifier: Modifier
 ) {
 
-    Column(modifier = modifier.padding(dimensionResource(id = R.dimen.padding_double))) {
+    Column(modifier = modifier.fillMaxSize()) {
+
+        HeaderSection(
+            title = productDetail.title
+        )
+
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding)))
 
         ConditionView(condition = productDetail.condition)
 

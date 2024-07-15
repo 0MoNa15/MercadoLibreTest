@@ -39,6 +39,7 @@ fun ProductListScreen (
             }
             products != null -> {
                 ProductListContent(
+                    nameProduct = nameProduct,
                     navigateToDetailProductScreen = navigateToDetailProductScreen,
                     modifier = Modifier.padding(innerPadding),
                     products = products
