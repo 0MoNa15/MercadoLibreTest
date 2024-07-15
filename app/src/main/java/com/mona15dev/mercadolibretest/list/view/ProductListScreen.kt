@@ -14,7 +14,7 @@ import com.mona15dev.mercadolibretest.list.view.state.WaitingProductsList
 import com.mona15dev.mercadolibretest.list.viewmodel.ProductListViewModel
 
 @Composable
-fun ProductListScreen (
+fun ProductListScreen(
     nameProduct: String?,
     navigateToDetailProductScreen: (productId: String) -> Unit,
     productListViewModel: ProductListViewModel = hiltViewModel()
@@ -23,9 +23,9 @@ fun ProductListScreen (
     val isLoading by productListViewModel.isLoading.observeAsState(false)
     val errorMessage by productListViewModel.messageErrorLiveData.observeAsState()
 
-    products?.let {
-        LaunchedEffect(it) {
-            productListViewModel.onSearchByName(nameProduct ?: "")
+    LaunchedEffect(nameProduct) {
+        if (nameProduct != null && products.isEmpty()) {
+            productListViewModel.onSearchByName(nameProduct)
         }
     }
 
@@ -37,16 +37,13 @@ fun ProductListScreen (
             errorMessage != null -> {
                 EmptyListView()
             }
-            products != null -> {
+            products.isNotEmpty() -> {
                 ProductListContent(
                     nameProduct = nameProduct,
                     navigateToDetailProductScreen = navigateToDetailProductScreen,
                     modifier = Modifier.padding(innerPadding),
                     products = products
                 )
-            }
-            products.isEmpty() -> {
-                EmptyListView()
             }
             else -> {
                 EmptyListView()

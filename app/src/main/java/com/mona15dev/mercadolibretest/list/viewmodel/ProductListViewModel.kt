@@ -2,40 +2,48 @@ package com.mona15dev.mercadolibretest.list.viewmodel
 
 import com.mona15dev.domain.product.list.usecase.GetProductByNameUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.ViewModel
 import com.mona15dev.domain.product.list.model.Product
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.SavedStateHandle
+
 @HiltViewModel
 class ProductListViewModel @Inject constructor(
-    private val getProductByNameUseCase: GetProductByNameUseCase
+    private val getProductByNameUseCase: GetProductByNameUseCase,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    val isLoading = MutableLiveData(false)
-    val messageErrorLiveData = MutableLiveData<String>()
-    val productsByNameListLiveData = MutableLiveData<List<Product>>()
+    private val _isLoading = savedStateHandle.getLiveData(StateProductList.IS_LOADING.toString(), false)
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
+    private val _messageErrorLiveData = savedStateHandle.getLiveData<String?>(StateProductList.ERROR_MESSAGE.toString())
+    val messageErrorLiveData: LiveData<String?> get() = _messageErrorLiveData
+
+    private val _productsByNameListLiveData = savedStateHandle.getLiveData(StateProductList.PRODUCTS_STATE.toString(), emptyList<Product>())
+    val productsByNameListLiveData: LiveData<List<Product>> get() = _productsByNameListLiveData
 
     fun onSearchByName(queryNameOfProduct: String) {
-        //Temporal revisar si tiene coherencia o si se puede optimizar (desacoplar)
-        if (!queryNameOfProduct.isNullOrEmpty() && queryNameOfProduct.isNotBlank()) {
+        if (queryNameOfProduct.isNotBlank()) {
             searchProductsByName(queryNameOfProduct)
         }
-        return
     }
 
-    private fun searchProductsByName(queryNameOfProduct: String) {
+    private fun searchProductsByName(query: String) {
         viewModelScope.launch {
-            isLoading.postValue(true)
+            _isLoading.value = true
             try {
-                val products = getProductByNameUseCase.invoke(queryNameOfProduct)
-                productsByNameListLiveData.postValue(products)
-                isLoading.postValue(false)
+                val products = getProductByNameUseCase.invoke(query)
+                _productsByNameListLiveData.value = products
+                _messageErrorLiveData.value = null
             } catch (e: Exception) {
-                isLoading.postValue(false)
-                messageErrorLiveData.value = e.message.toString()
+                //Temporal, manejo de errores
+                _messageErrorLiveData.value = e.message
+            } finally {
+                _isLoading.value = false
             }
         }
     }
