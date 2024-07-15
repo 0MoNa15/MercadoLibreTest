@@ -28,7 +28,6 @@ class ProductDetailRetrofitRepository @Inject constructor(
             } catch (e: Exception) {
                 throw DataException.NetworkException(NetworkError.UNKNOWN_ERROR.message)
             }
-            //Temporal Para probar los estados, genera un 403 consultar una url incorrecta "https://api.mercadolibre.com/sites/MLA/items/MLA1680838032"
         }
     }
 
