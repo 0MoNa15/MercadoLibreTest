@@ -11,4 +11,6 @@
     <string name="reload">Reintentar</string>
     <string name="products_list">Lista de productos</string>
     <string name="not_found_list_products">No se han encontrado productos</string>
+    <string name="price">Precio: $%1$s</string>
+    <string name="state">Estado: %1$s</string>
 </resources>
