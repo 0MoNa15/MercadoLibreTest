@@ -9,11 +9,6 @@ class ProductDetailRepositoryImpl @Inject constructor(
 ) : ProductDetailRepository {
 
     override suspend fun getProductDetail(productId: String): ProductDetail {
-        try {
-            return remote.getProductDetail(productId)
-        } catch  (cause: Throwable) {
-            //Temporal manejo de errores pendiente
-            throw Exception("getProductDetail")
-        }
+        return remote.getProductDetail(productId)
     }
 }
