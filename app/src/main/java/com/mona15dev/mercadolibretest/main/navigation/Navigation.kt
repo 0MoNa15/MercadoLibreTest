@@ -11,7 +11,11 @@ import com.mona15dev.mercadolibretest.main.views.SplashScreen
 import com.mona15dev.mercadolibretest.search.ProductSearchScreen
 
 @Composable
-fun Navigation(isLoading: (Boolean) -> Unit, loadingSplashScreen: Boolean) {
+fun Navigation(
+    isLoading: (Boolean) -> Unit,
+    loadingSplashScreen: Boolean
+) {
+
     if (loadingSplashScreen) {
         SplashScreen(isLoading = isLoading)
     } else {
