@@ -15,3 +15,13 @@ fun Product.getShortTitle(maxLength: Int = 15): String {
         title
     }
 }
+
+var Product.secureThumbnail: String
+    get() = if (thumbnail.startsWith("http://")) {
+        "https://" + thumbnail.substring("http://".length)
+    } else {
+        thumbnail
+    }
+    set(value) {
+        thumbnail = value
+    }

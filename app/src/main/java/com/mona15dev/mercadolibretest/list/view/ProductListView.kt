@@ -26,6 +26,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
 import com.mona15dev.domain.product.list.model.Product
+import com.mona15dev.domain.product.list.model.secureThumbnail
 import com.mona15dev.mercadolibretest.R
 
 @Composable
@@ -62,7 +63,7 @@ fun ProductItem(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             AsyncImage(
-                model = product.thumbnail,
+                model = product.secureThumbnail,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
