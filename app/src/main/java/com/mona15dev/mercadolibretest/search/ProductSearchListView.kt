@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.mona15dev.domain.product.list.model.Product
 import com.mona15dev.domain.product.list.model.getShortTitle
@@ -30,7 +31,7 @@ fun ProductSearchListView(
     products: List<Product>
 ) {
     if (products.isEmpty()) {
-        EmptyListView()
+        EmptyListView(title = stringResource(R.string.view_list_products))
     } else {
         LazyColumn(
             contentPadding = PaddingValues(dimensionResource(id = R.dimen.no_padding)),

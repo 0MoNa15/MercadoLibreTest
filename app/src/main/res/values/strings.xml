@@ -13,4 +13,6 @@
     <string name="not_found_list_products">No se han encontrado productos</string>
     <string name="price">Precio: $%1$s</string>
     <string name="state">Estado: %1$s</string>
+    <string name="view_list_products">Listar productos</string>
+    <string name="error_listando_los_productos">Error listando los productos</string>
 </resources>

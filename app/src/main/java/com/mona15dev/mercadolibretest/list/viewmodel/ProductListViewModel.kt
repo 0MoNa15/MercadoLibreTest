@@ -39,7 +39,6 @@ class ProductListViewModel @Inject constructor(
                 val products = getProductByNameUseCase.invoke(query)
                 _productsByNameListLiveData.value = products
             } catch (e: Exception) {
-                //Temporal, manejo de errores
                 _messageErrorLiveData.value = e.message
             } finally {
                 _isLoading.value = false

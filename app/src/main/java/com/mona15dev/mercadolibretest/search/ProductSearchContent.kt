@@ -29,6 +29,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.mona15dev.domain.product.list.model.Product
 import com.mona15dev.mercadolibretest.R
+import com.mona15dev.mercadolibretest.list.view.state.EmptyListView
 import com.mona15dev.mercadolibretest.list.view.state.WaitingProductsList
 import com.mona15dev.mercadolibretest.list.viewmodel.ProductListViewModel
 
@@ -38,7 +39,9 @@ fun ProductSearchContent(
     viewModel: ProductListViewModel
 ) {
     val products by viewModel.productsByNameListLiveData.observeAsState(emptyList())
-    val loading by viewModel.isLoading.observeAsState(false)
+    val isLoading by viewModel.isLoading.observeAsState(false)
+    val errorMessage by viewModel.messageErrorLiveData.observeAsState()
+
     var searchTerm by rememberSaveable { mutableStateOf("") }
 
     //Temporal desacoplar la vista de la funcionalidad para filtrar la lista de productos
@@ -91,14 +94,22 @@ fun ProductSearchContent(
                 FieldSearch(search)
             }
 
-            if (loading != null && loading == true) {
-                WaitingProductsList()
-            } else {
-                //Temporal manejar error de cuando no se tengan datos aquí
-                ProductSearchListView(
-                    products = productsFilter.toList(),
-                    navigateToListProductsScreen = navigateToListProductsScreen
-                )
+            when {
+                isLoading -> {
+                    WaitingProductsList()
+                }
+                errorMessage != null -> {
+                    EmptyListView(title = errorMessage ?: stringResource(R.string.view_search_products))
+                }
+                products.isNotEmpty() -> {
+                    ProductSearchListView(
+                        products = productsFilter.toList(),
+                        navigateToListProductsScreen = navigateToListProductsScreen
+                    )
+                }
+                else -> {
+                    EmptyListView(title = stringResource(R.string.view_search_products))
+                }
             }
         }
     }

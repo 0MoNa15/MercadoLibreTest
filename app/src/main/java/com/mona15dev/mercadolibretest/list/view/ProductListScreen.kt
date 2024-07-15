@@ -8,7 +8,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mona15dev.mercadolibretest.R
 import com.mona15dev.mercadolibretest.list.view.state.EmptyListView
 import com.mona15dev.mercadolibretest.list.view.state.WaitingProductsList
 import com.mona15dev.mercadolibretest.list.viewmodel.ProductListViewModel
@@ -35,7 +37,7 @@ fun ProductListScreen(
                 WaitingProductsList()
             }
             errorMessage != null -> {
-                EmptyListView()
+                EmptyListView(stringResource(R.string.error_listando_los_productos))
             }
             products.isNotEmpty() -> {
                 ProductListContent(
@@ -46,7 +48,7 @@ fun ProductListScreen(
                 )
             }
             else -> {
-                EmptyListView()
+                EmptyListView(title = stringResource(R.string.view_list_products))
             }
         }
     }

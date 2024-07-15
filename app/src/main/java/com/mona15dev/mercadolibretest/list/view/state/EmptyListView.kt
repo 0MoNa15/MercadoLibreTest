@@ -17,7 +17,9 @@ import androidx.compose.ui.res.stringResource
 import com.mona15dev.mercadolibretest.R
 
 @Composable
-fun EmptyListView() {
+fun EmptyListView(
+    title: String
+) {
     BoxWithConstraints(
         modifier = Modifier
             .fillMaxSize()
@@ -43,9 +45,8 @@ fun EmptyListView() {
                 modifier = Modifier.size(imageSize)
             )
 
-            val emptyListText = stringResource(R.string.view_search_products)
             Text(
-                text = emptyListText,
+                text = title,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .padding(top = dimensionResource(id = R.dimen.padding))
