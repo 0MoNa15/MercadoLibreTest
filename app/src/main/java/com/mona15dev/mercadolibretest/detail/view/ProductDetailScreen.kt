@@ -21,13 +21,13 @@ fun ProductDetailScreen(
     productId: String?,
     productDetailViewModel: ProductDetailViewModel = hiltViewModel()
 ) {
-    val productDetailState by productDetailViewModel.productDetailLiveData.observeAsState()
+    val productDetail by productDetailViewModel.productDetailLiveData.observeAsState()
     val isLoading by productDetailViewModel.isLoading.observeAsState(false)
     val errorMessage by productDetailViewModel.messageErrorLiveData.observeAsState()
 
-    productId?.let {
-        LaunchedEffect(it) {
-            productDetailViewModel.consultProductDetail(it)
+    LaunchedEffect(productId) {
+        if (productId != null && productDetail == null) {
+            productDetailViewModel.consultProductDetail(productId)
         }
     }
 
@@ -48,9 +48,9 @@ fun ProductDetailScreen(
                     showButtonReload = true
                 )
             }
-            productDetailState != null -> {
+            productDetail != null -> {
                 ProductDetailContent(
-                    productDetail = productDetailState!!,
+                    productDetail = productDetail!!,
                     modifier = Modifier.padding(innerPadding)
                 )
             }
