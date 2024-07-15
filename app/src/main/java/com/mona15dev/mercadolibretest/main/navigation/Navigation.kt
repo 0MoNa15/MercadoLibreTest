@@ -43,7 +43,6 @@ fun Navigation(isLoading: (Boolean) -> Unit, loadingSplashScreen: Boolean) {
             }
 
             composable("${ScreenRoute.PRODUCT_DETAIL_SCREEN}/{${ScreenArgument.PRODUCT_ID_ARGUMENT}}") {
-                //Temporal convertir a rememberSaveable
                 val productId = remember {
                     it.arguments?.getString(ScreenArgument.PRODUCT_ID_ARGUMENT.toString())
                 }
