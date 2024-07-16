@@ -39,6 +39,7 @@ By MoNa15Dev
 
 ## Manejo de excepciones
 
+En la aplicación se puede apreciar el control de los errores conocidos, cómo por ejemplo datos vacíos, listas sin ninguna información (nulas), errores enviados desde la capa de data a través del throw y recepcionados dentro de los ViewModel con un mensaje de error. Sin embargo para los error no conocidos utilizaremos:
 - [UncaughtExceptionHandler](https://developer.android.com/reference/java/lang/Thread.UncaughtExceptionHandler)
 
 
