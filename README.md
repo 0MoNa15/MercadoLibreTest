@@ -3,12 +3,13 @@ By MoNa15Dev
 
 
 ![Kotlin](https://img.shields.io/badge/kotlin-1.9.0-blue)
-![Retrofit](https://img.shields.io/badge/retrofit-2.9.0-yellowgreen)
+![Retrofit](https://img.shields.io/badge/retrofit-2.9.0-pink)
 ![Coroutines](https://img.shields.io/badge/coroutines-1.8.1-yellowgreen)
 ![Navigation](https://img.shields.io/badge/navigation-2.8.0-orange)
 ![Room](https://img.shields.io/badge/room-2.6.1-blue)
 ![Hilt](https://img.shields.io/badge/hilt-2.48-brightgreen)
-![Gson](https://img.shields.io/badge/gson-2.9.0-yellowgreen)
+![Gson](https://img.shields.io/badge/gson-2.9.0-yellow)
+![Gson](https://img.shields.io/badge/mockito-5.1.1-green)
 
 # Pantallazos del app
 
