@@ -10,11 +10,13 @@ By MoNa15Dev
 ![Hilt](https://img.shields.io/badge/hilt-2.48-brightgreen)
 ![Gson](https://img.shields.io/badge/gson-2.9.0-yellowgreen)
 
-# Screenshots
+# Pantallazos del app
 
 <table>
     <tr>
-     <td><img src="/images/image_search.png"></td>
+    <td><img src="/images/image_splash.png"></td>
+    <td><img src="/images/image_search_empty.png"></td>
+    <td><img src="/images/image_search.png"></td>
     <td><img src="/images/image_list.png"></td>
     <td><img src="/images/image_detail.png"></td>
     </tr>
