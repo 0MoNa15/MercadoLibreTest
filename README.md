@@ -41,7 +41,6 @@ By MoNa15Dev
 
 # Para correr el proyecto
 - Android Studio Koala | [2024.1.1](https://developer.android.com/studio/releases?hl=es-419)
-- Java 17
 - Versión de Android mínima 7.0 (Nougat)
 
 
