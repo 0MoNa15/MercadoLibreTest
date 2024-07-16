@@ -33,6 +33,8 @@ By MoNa15Dev
 - [Singleton](https://sourcemaking.com/design_patterns/singleton)
 - [Repository](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design)
 - [Inyección de dependencias](https://developer.android.com/training/dependency-injection?hl=es-419)
+- [Anticorrupción](https://docs.aws.amazon.com/es_es/prescriptive-guidance/latest/cloud-design-patterns/acl.html)
+- [Builder](https://sourcemaking.com/design_patterns/builder)
 
 ## Manejo de excepciones
 
