@@ -1,7 +1,7 @@
 package com.mona15dev.data.product.list.repository
 
 import com.mona15dev.data.product.api.ProductNetwork
-import com.mona15dev.data.product.list.dto.ProductDto
+import com.mona15dev.data.product.list.anticorruption.ProductTranslate
 import com.mona15dev.domain.product.exceptions.DataException
 import com.mona15dev.domain.product.exceptions.NetworkError
 import com.mona15dev.domain.product.list.model.Product
@@ -18,7 +18,8 @@ class ProductListRetrofitRepository @Inject constructor(
         return withContext(Dispatchers.IO) {
             try {
                 val response = network.apiSearchProducts(query)
-                response.listProducts.map { mapProductDtoToProduct(it) }
+                //response.listProducts.map { mapProductDtoToProduct(it) }
+                ProductTranslate.mapProductsDtoToDomain(response.listProducts)
             } catch (e: HttpException) {
                 val errorCode = e.code()
                 val networkError = NetworkError.entries.find { it.code == errorCode }
@@ -30,15 +31,4 @@ class ProductListRetrofitRepository @Inject constructor(
             }
         }
     }
-}
-
-//Temporal pasar a un Mapper independiente
-fun mapProductDtoToProduct(productDto: ProductDto): Product {
-    return Product(
-        id = productDto.id,
-        title = productDto.title,
-        price = productDto.price,
-        thumbnail = productDto.thumbnail,
-        condition = productDto.condition
-    )
 }
