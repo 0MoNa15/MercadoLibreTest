@@ -53,7 +53,10 @@ fun ProductItem(
 ) {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = dimensionResource(id = R.dimen.padding_4dp)),
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(dimensionResource(id = R.dimen.padding)),
+
         colors = CardDefaults.cardColors(containerColor = Color.White),
     ) {
         Row(
@@ -79,20 +82,10 @@ fun ProductItem(
                     modifier = Modifier.align(Alignment.Start)
                 )
                 Text(
-                    text = product.price.toString(),
+                    text = stringResource(R.string.price, product.price),
+                    color = Color.Gray,
                     modifier = Modifier.align(Alignment.Start)
                 )
-                Text(
-                    text = "Hasta ${product.price} cuotas",
-                    //text = stringResource(id = R.string.installments_text, "24" ?: 12),
-                    modifier = Modifier.align(Alignment.Start)
-                )
-                if (product.price > 100000) {
-                    Text(
-                        text = stringResource(id = R.string.free_send),
-                        modifier = Modifier.align(Alignment.Start)
-                    )
-                }
             }
         }
     }

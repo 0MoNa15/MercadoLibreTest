@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import com.mona15dev.domain.product.list.model.Product
 import com.mona15dev.mercadolibretest.R
 
@@ -32,7 +33,7 @@ fun ProductListContent(
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         HeaderSection(
-            title = nameProduct ?: "Lista de productos"
+            title = "${nameProduct}..."
         )
 
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding)))

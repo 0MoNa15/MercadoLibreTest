@@ -15,4 +15,5 @@
     <string name="state">Estado: %1$s</string>
     <string name="view_list_products">Listar productos</string>
     <string name="error_listando_los_productos">Error listando los productos</string>
+    <string name="list_products">Lista de productos</string>
 </resources>
