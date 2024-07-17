@@ -49,6 +49,12 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    lint {
+        xmlReport = true
+        htmlReport = true
+        xmlOutput = file("build/reports/lint-results.xml")
+        htmlOutput = file("build/reports/lint-results.html")
+    }
 }
 
 dependencies {
