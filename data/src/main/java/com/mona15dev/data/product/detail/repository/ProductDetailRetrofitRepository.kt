@@ -1,8 +1,7 @@
 package com.mona15dev.data.product.detail.repository
 
 import com.mona15dev.data.product.api.ProductNetwork
-import com.mona15dev.data.product.detail.dto.ProductDetailDto
-import com.mona15dev.domain.product.detail.model.ProductCondition
+import com.mona15dev.data.product.detail.anticorruption.ProductDetailTranslate
 import com.mona15dev.domain.product.detail.model.ProductDetail
 import com.mona15dev.domain.product.exceptions.DataException
 import com.mona15dev.domain.product.exceptions.NetworkError
@@ -18,7 +17,7 @@ class ProductDetailRetrofitRepository @Inject constructor(
         return withContext(Dispatchers.IO) {
             try {
                 val response = network.apiProductDetail(productId)
-                mapProductDetailDtoToProductDetail(response)
+                ProductDetailTranslate.mapProductDetailDtoToDomain(response)
             } catch (e: HttpException) {
                 val errorCode = e.code()
                 val networkError = NetworkError.entries.find { it.code == errorCode }
@@ -29,16 +28,5 @@ class ProductDetailRetrofitRepository @Inject constructor(
                 throw DataException.NetworkException(NetworkError.UNKNOWN_ERROR.message)
             }
         }
-    }
-
-    // Temporal pasar a un Mapper independiente
-    fun mapProductDetailDtoToProductDetail(productDetailDto: ProductDetailDto): ProductDetail {
-        return ProductDetail(
-            id = productDetailDto.id,
-            title = productDetailDto.title,
-            price = productDetailDto.price,
-            condition = ProductCondition.fromString(productDetailDto.condition),
-            pictures = productDetailDto.pictures.map { it.secureUrl }
-        )
     }
 }
