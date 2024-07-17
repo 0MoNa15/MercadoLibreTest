@@ -31,7 +31,7 @@ class ProductDetailRetrofitRepositoryTest {
     @Test
     fun `getProductDetail() exitoso, debería devolver un detalle de producto válido`() = runBlocking {
         // Arrange
-        val pictureDtoBuilder = PictureDtoBuilder().withSecureUrl("https://example.com/image1.jpg").build()
+        val pictureDtoBuilder = PictureDtoBuilder().withSecureUrl("https://http2.mlstatic.com/D_643621-MLU72748586153_112023-I.jpg").build()
         val productDetailDto = ProductDetailDtoBuilder()
             .withId("MLA123456789")
             .withTitle("Laptop")
