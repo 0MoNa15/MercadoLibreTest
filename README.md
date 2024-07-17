@@ -46,6 +46,11 @@ En la aplicación se puede apreciar el control de los errores conocidos, cómo p
 # Para correr el proyecto
 - Android Studio Koala | [2024.1.1](https://developer.android.com/studio/releases?hl=es-419)
 - Versión de Android mínima 7.0 (Nougat)
+- Versión de Java 17
+  - Para ver análisis de código:
+```
+./gradlew lint
+```
 
 
 
