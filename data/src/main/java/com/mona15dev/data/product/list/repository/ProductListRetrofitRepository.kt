@@ -18,7 +18,6 @@ class ProductListRetrofitRepository @Inject constructor(
         return withContext(Dispatchers.IO) {
             try {
                 val response = network.apiSearchProducts(query)
-                //response.listProducts.map { mapProductDtoToProduct(it) }
                 ProductTranslate.mapProductsDtoToDomain(response.listProducts)
             } catch (e: HttpException) {
                 val errorCode = e.code()
