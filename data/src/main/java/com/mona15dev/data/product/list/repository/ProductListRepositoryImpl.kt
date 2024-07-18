@@ -2,8 +2,6 @@ package com.mona15dev.data.product.list.repository
 
 import com.mona15dev.domain.product.list.model.Product
 import com.mona15dev.domain.product.list.repository.ProductListRepository
-import retrofit2.HttpException
-import java.io.IOException
 import javax.inject.Inject
 
 class ProductListRepositoryImpl @Inject constructor(
