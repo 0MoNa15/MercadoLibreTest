@@ -33,7 +33,7 @@ fun ProductListContent(
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         HeaderSection(
-            title = "${nameProduct}..."
+            title = nameProduct ?: stringResource(R.string.detail_of_product)
         )
 
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding)))
