@@ -1,5 +1,7 @@
 package com.mona15dev.domain.product.list.model
 
+const val MAXIMUM_CHARACTERS_TO_DISPLAY_A_TITLE = 15
+
 data class Product(
     var id: String,
     var title: String,
@@ -8,9 +10,9 @@ data class Product(
     var condition: String
 )
 
-fun Product.getShortTitle(maxLength: Int = 15): String {
-    return if (title.length > maxLength) {
-        title.take(maxLength)
+fun Product.getShortTitle(): String {
+    return if (title.length > MAXIMUM_CHARACTERS_TO_DISPLAY_A_TITLE) {
+        "${title.take(MAXIMUM_CHARACTERS_TO_DISPLAY_A_TITLE)}..."
     } else {
         title
     }
