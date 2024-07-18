@@ -1,7 +1,7 @@
 package com.mona15dev.data.product.detail.repositoy
 
-
 import com.mona15dev.data.product.api.ProductNetwork
+import com.mona15dev.data.product.detail.anticorruption.ProductDetailTranslate
 import com.mona15dev.data.product.detail.model.PictureDtoBuilder
 import com.mona15dev.data.product.detail.model.ProductDetailDtoBuilder
 import com.mona15dev.data.product.detail.repository.ProductDetailRetrofitRepository
@@ -15,6 +15,11 @@ import org.junit.Test
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
+import org.junit.*
+
+@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
 class ProductDetailRetrofitRepositoryTest {
 
@@ -22,10 +27,17 @@ class ProductDetailRetrofitRepositoryTest {
     private lateinit var productNetwork: ProductNetwork
 
     private lateinit var productDetailRetrofitRepository: ProductDetailRetrofitRepository
+    private val testCoroutineDispatcher = UnconfinedTestDispatcher()
 
     @Before
     fun setUp() {
         productDetailRetrofitRepository = ProductDetailRetrofitRepository(productNetwork)
+        Dispatchers.setMain(testCoroutineDispatcher)  // Configura el dispatcher principal para las pruebas
+    }
+
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()  // Restablece el dispatcher principal
     }
 
     @Test
@@ -41,7 +53,7 @@ class ProductDetailRetrofitRepositoryTest {
             .build()
 
         val productId = "MLA123456789"
-        val expectedProductDetail = productDetailRetrofitRepository.mapProductDetailDtoToProductDetail(productDetailDto)
+        val expectedProductDetail = ProductDetailTranslate.mapProductDetailDtoToDomain(productDetailDto)
 
         `when`(productNetwork.apiProductDetail(productId)).thenReturn(productDetailDto)
 

@@ -2,12 +2,13 @@ package com.mona15dev.data.product.detail.model
 
 import com.mona15dev.data.product.detail.dto.PictureDto
 import com.mona15dev.data.product.detail.dto.ProductDetailDto
+import com.mona15dev.domain.product.detail.model.ProductCondition
 
 class ProductDetailDtoBuilder {
-    private var id: String = "default_id"
-    private var title: String = "default_title"
-    private var price: Int = 0
-    private var condition: String = "new"
+    private var id: String = ProductDetailDtoDefaultTest().id
+    private var title: String = ProductDetailDtoDefaultTest().title
+    private var price: Int = ProductDetailDtoDefaultTest().price
+    private var condition: String = ProductCondition.NEW.displayName
     private var pictures: List<PictureDto> = emptyList()
 
     fun withId(id: String) = apply { this.id = id }

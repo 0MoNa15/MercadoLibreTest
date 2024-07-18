@@ -6,7 +6,6 @@ class PictureDtoBuilder {
     private var id: String = "default_id"
     private var secureUrl: String = "https://default.url/image.jpg"
 
-    fun withId(id: String) = apply { this.id = id }
     fun withSecureUrl(secureUrl: String) = apply { this.secureUrl = secureUrl }
 
     fun build() = PictureDto(

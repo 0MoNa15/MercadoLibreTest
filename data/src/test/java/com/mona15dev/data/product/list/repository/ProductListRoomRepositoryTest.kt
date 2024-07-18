@@ -4,7 +4,6 @@ import com.mona15dev.data.product.list.database.dao.ProductDao
 import com.mona15dev.data.product.list.database.entity.mapperToModel
 import com.mona15dev.data.product.list.model.ProductEntityBuilder
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.After
@@ -17,6 +16,11 @@ import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
+import org.junit.Assert.assertTrue
+
+@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
 class ProductListRoomRepositoryTest {
 
@@ -28,7 +32,7 @@ class ProductListRoomRepositoryTest {
     @Before
     fun setUp() {
         productListRoomRepository = ProductListRoomRepository(productDao)
-        Dispatchers.setMain(Dispatchers.Unconfined)
+        Dispatchers.setMain(StandardTestDispatcher())
     }
 
     @After
@@ -37,32 +41,40 @@ class ProductListRoomRepositoryTest {
     }
 
     @Test
-    fun `getProductsByName debería devolver una lista de productos válida`() = runBlocking {
+    fun `getProductsByName should return valid product list`() = runTest {
         // Arrange
-        val search = "Laptop"
-        val entityList = listOf(
+        val search = "Biblioteca"
+        val expectedProductList = listOf(
+            ProductEntityBuilder().build(),
             ProductEntityBuilder()
-                .withId("1")
-                .withTitle("Escritorio ajustable")
-                .withPrice(1500.0)
-                .withThumbnail("https://http2.mlstatic.com/D_643621-MLU72748586153_112023-I.jpg")
-                .withCondition("new")
-                .build(),
-            ProductEntityBuilder()
-                .withId("2")
-                .withTitle("Laptop HP")
-                .withPrice(1000.0)
-                .withThumbnail("https://http2.mlstatic.com/D_643621-MLU72748586153_112023-I.jpg")
+                .withId("MLA1412185121")
+                .withTitle("Biblioteca Repisa Estantes Color Olmo/blanco Home Collection")
+                .withPrice(89999.0)
+                .withThumbnail("http://http2.mlstatic.com/D_925857-MLU75981802107_042024-I.jpg")
                 .withCondition("new")
                 .build()
         )
-        `when`(productDao.getProductListByName(search)).thenReturn(entityList)
+        `when`(productDao.getProductListByName(search)).thenReturn(expectedProductList)
 
         // Act
         val result = productListRoomRepository.getProductsByName(search)
 
         // Assert
         verify(productDao).getProductListByName(search)
-        assertEquals(entityList.map { it.mapperToModel() }, result)
+        assertEquals(expectedProductList.map { it.mapperToModel() }, result)
+    }
+
+    @Test
+    fun `getProductsByName should return empty list when no products are found`() = runTest {
+        // Arrange
+        val search = "NonExistingProduct"
+        `when`(productDao.getProductListByName(search)).thenReturn(emptyList())
+
+        // Act
+        val result = productListRoomRepository.getProductsByName(search)
+
+        // Assert
+        verify(productDao).getProductListByName(search)
+        assertTrue(result.isEmpty())
     }
 }

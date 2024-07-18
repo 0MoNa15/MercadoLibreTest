@@ -6,6 +6,7 @@ import com.mona15dev.data.product.list.dto.ProductListDto
 import com.mona15dev.data.product.list.model.ProductDtoBuilder
 import com.mona15dev.domain.product.exceptions.DataException
 import com.mona15dev.domain.product.exceptions.NetworkError
+import kotlinx.coroutines.Dispatchers
 import org.junit.Assert.assertEquals
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -17,8 +18,13 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.*
 
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.*
+import org.junit.*
+
+@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
-class ProductListRepositoryImplTest {
+class ProductListRetrofitRepositoryTest {
 
     @Mock
     private lateinit var productNetwork: ProductNetwork
@@ -28,10 +34,16 @@ class ProductListRepositoryImplTest {
     @Before
     fun setUp() {
         productListRetrofitRepository = ProductListRetrofitRepository(productNetwork)
+        Dispatchers.setMain(StandardTestDispatcher())
+    }
+
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()
     }
 
     @Test
-    fun `getProductsByNameRetrofit() exitoso, debería devolver una lista de productos válida`() = runBlocking {
+    fun `getProductsByNameRetrofit debería devolver una lista de producos válida`() = runBlocking {
         // Arrange
         val productDtoList = listOf(
             ProductDtoBuilder().build(),
@@ -51,14 +63,13 @@ class ProductListRepositoryImplTest {
         // Act
         val result = productListRetrofitRepository.getProductsByNameRetrofit(searchQuery)
 
-
         // Assert
         verify(productNetwork).apiSearchProducts(searchQuery)
         assertEquals(expectedDomainList, result)
     }
 
     @Test
-    fun `getProductsByNameRetrofit sin resultados debería devolver una lista vacía`() = runBlocking {
+    fun `getProductsByNameRetrofit debería devolver una lista de productos vacía`() = runBlocking {
         // Arrange
         val searchQuery = "productoInexistente"
         val responseProductsDto = ProductListDto(emptyList())
@@ -73,22 +84,19 @@ class ProductListRepositoryImplTest {
     }
 
     @Test
-    fun `getProductsByNameRetrofit() exception, debería lanzar un NoDataRecipeException`() = runBlocking {
-
+    fun `getProductsByNameRetrofit debería devolver la excepcion throw NoDataRecipeException`() = runBlocking {
         // Arrange
         val searchQuery = "er00r"
         val expected = DataException.NetworkException(NetworkError.UNKNOWN_ERROR.message)
         `when`(productNetwork.apiSearchProducts(searchQuery))
             .thenAnswer { throw DataException.NetworkException(NetworkError.UNKNOWN_ERROR.message) }
 
-        // Act
-        val exceptionResult = assertThrows(DataException.NetworkException::class.java){
+        // Act & Assert
+        val exceptionResult = assertThrows(DataException.NetworkException::class.java) {
             runBlocking {
                 productListRetrofitRepository.getProductsByNameRetrofit(searchQuery)
             }
         }
-
-        // Assert
         assertEquals(expected.message, exceptionResult.message)
     }
 }
